@@ -1,0 +1,119 @@
+(base) hemanth-krishna-a-b@hemanth-krishna-a-b:~/Desktop/Hemanth$ python 01.py 
+2025-01-18 17:37:08.046905: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+/home/hemanth-krishna-a-b/anaconda3/lib/python3.12/site-packages/keras/src/trainers/data_adapters/py_dataset_adapter.py:121: UserWarning: Your `PyDataset` class should call `super().__init__(**kwargs)` in its constructor. `**kwargs` can include `workers`, `use_multiprocessing`, `max_queue_size`. Do not pass these arguments to `fit()`, as they will be ignored.
+  self._warn_if_super_not_called()
+Epoch 1/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.8228 - loss: 0.48552025-01-18 18:15:31.355511: W external/local_tsl/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 548640000 exceeds 10% of free system memory.
+
+Epoch 1: val_loss improved from inf to 5.08466, saving model to model_weights.keras
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2395s 4s/step - accuracy: 0.8229 - loss: 0.4853 - val_accuracy: 0.2520 - val_loss: 5.0847 - learning_rate: 1.0000e-04
+Epoch 2/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9387 - loss: 0.1891   
+Epoch 2: val_loss improved from 5.08466 to 0.61549, saving model to model_weights.keras
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2480s 4s/step - accuracy: 0.9387 - loss: 0.1891 - val_accuracy: 0.8303 - val_loss: 0.6155 - learning_rate: 1.0000e-04
+Epoch 3/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9635 - loss: 0.1076   
+Epoch 3: val_loss improved from 0.61549 to 0.50743, saving model to model_weights.keras
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2466s 4s/step - accuracy: 0.9635 - loss: 0.1076 - val_accuracy: 0.8723 - val_loss: 0.5074 - learning_rate: 1.0000e-04
+Epoch 4/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9634 - loss: 0.1175   
+Epoch 4: val_loss improved from 0.50743 to 0.23121, saving model to model_weights.keras
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2442s 4s/step - accuracy: 0.9634 - loss: 0.1175 - val_accuracy: 0.9405 - val_loss: 0.2312 - learning_rate: 1.0000e-04
+Epoch 5/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9674 - loss: 0.0959   
+Epoch 5: val_loss improved from 0.23121 to 0.05424, saving model to model_weights.keras
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2451s 4s/step - accuracy: 0.9674 - loss: 0.0959 - val_accuracy: 0.9843 - val_loss: 0.0542 - learning_rate: 1.0000e-04
+Epoch 6/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9794 - loss: 0.0611   
+Epoch 6: val_loss did not improve from 0.05424
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2429s 4s/step - accuracy: 0.9794 - loss: 0.0611 - val_accuracy: 0.9746 - val_loss: 0.0753 - learning_rate: 1.0000e-04
+Epoch 7/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9818 - loss: 0.0570   
+Epoch 7: val_loss did not improve from 0.05424
+
+Epoch 7: ReduceLROnPlateau reducing learning rate to 2.9999999242136255e-05.
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2453s 4s/step - accuracy: 0.9818 - loss: 0.0571 - val_accuracy: 0.9676 - val_loss: 0.1062 - learning_rate: 1.0000e-04
+Epoch 8/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9885 - loss: 0.0295   
+Epoch 8: val_loss did not improve from 0.05424
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2533s 4s/step - accuracy: 0.9885 - loss: 0.0295 - val_accuracy: 0.9808 - val_loss: 0.0674 - learning_rate: 3.0000e-05
+Epoch 9/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9944 - loss: 0.0163       
+Epoch 9: val_loss did not improve from 0.05424
+
+Epoch 9: ReduceLROnPlateau reducing learning rate to 8.999999772640877e-06.
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2567s 4s/step - accuracy: 0.9944 - loss: 0.0163 - val_accuracy: 0.9843 - val_loss: 0.0548 - learning_rate: 3.0000e-05
+Epoch 10/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9979 - loss: 0.0090       
+Epoch 10: val_loss improved from 0.05424 to 0.04610, saving model to model_weights.keras
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2633s 5s/step - accuracy: 0.9979 - loss: 0.0090 - val_accuracy: 0.9878 - val_loss: 0.0461 - learning_rate: 9.0000e-06
+Epoch 11/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9985 - loss: 0.0048   
+Epoch 11: val_loss did not improve from 0.04610
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2609s 5s/step - accuracy: 0.9985 - loss: 0.0048 - val_accuracy: 0.9869 - val_loss: 0.0496 - learning_rate: 9.0000e-06
+Epoch 12/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9977 - loss: 0.0057       
+Epoch 12: val_loss did not improve from 0.04610
+
+Epoch 12: ReduceLROnPlateau reducing learning rate to 2.6999998226528985e-06.
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2614s 5s/step - accuracy: 0.9977 - loss: 0.0057 - val_accuracy: 0.9869 - val_loss: 0.0486 - learning_rate: 9.0000e-06
+Epoch 13/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9992 - loss: 0.0052   
+Epoch 13: val_loss did not improve from 0.04610
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2598s 5s/step - accuracy: 0.9992 - loss: 0.0052 - val_accuracy: 0.9860 - val_loss: 0.0500 - learning_rate: 2.7000e-06
+Epoch 14/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9985 - loss: 0.0060   
+Epoch 14: val_loss did not improve from 0.04610
+
+Epoch 14: ReduceLROnPlateau reducing learning rate to 8.099999604382901e-07.
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2633s 5s/step - accuracy: 0.9985 - loss: 0.0060 - val_accuracy: 0.9869 - val_loss: 0.0492 - learning_rate: 2.7000e-06
+Epoch 15/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9991 - loss: 0.0045       
+Epoch 15: val_loss did not improve from 0.04610
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2627s 5s/step - accuracy: 0.9991 - loss: 0.0045 - val_accuracy: 0.9869 - val_loss: 0.0492 - learning_rate: 8.1000e-07
+Epoch 16/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9989 - loss: 0.0029       
+Epoch 16: val_loss did not improve from 0.04610
+
+Epoch 16: ReduceLROnPlateau reducing learning rate to 2.4299998813148704e-07.
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2580s 5s/step - accuracy: 0.9989 - loss: 0.0029 - val_accuracy: 0.9869 - val_loss: 0.0492 - learning_rate: 8.1000e-07
+Epoch 17/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9978 - loss: 0.0041   
+Epoch 17: val_loss did not improve from 0.04610
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2633s 5s/step - accuracy: 0.9978 - loss: 0.0041 - val_accuracy: 0.9869 - val_loss: 0.0489 - learning_rate: 2.4300e-07
+Epoch 18/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9988 - loss: 0.0042       
+Epoch 18: val_loss did not improve from 0.04610
+
+Epoch 18: ReduceLROnPlateau reducing learning rate to 7.289999643944612e-08.
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2641s 5s/step - accuracy: 0.9988 - loss: 0.0042 - val_accuracy: 0.9869 - val_loss: 0.0484 - learning_rate: 2.4300e-07
+Epoch 19/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9996 - loss: 0.0030       
+Epoch 19: val_loss did not improve from 0.04610
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2601s 5s/step - accuracy: 0.9996 - loss: 0.0030 - val_accuracy: 0.9869 - val_loss: 0.0486 - learning_rate: 7.2900e-08
+Epoch 20/20
+572/572 ━━━━━━━━━━━━━━━━━━━━ 0s 4s/step - accuracy: 0.9999 - loss: 0.0019       
+Epoch 20: val_loss did not improve from 0.04610
+
+Epoch 20: ReduceLROnPlateau reducing learning rate to 2.1869998079182552e-08.
+572/572 ━━━━━━━━━━━━━━━━━━━━ 2456s 4s/step - accuracy: 0.9999 - loss: 0.0019 - val_accuracy: 0.9869 - val_loss: 0.0490 - learning_rate: 7.2900e-08
+Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
+2025-01-19 07:47:10.008209: W external/local_tsl/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 629280000 exceeds 10% of free system memory.
+41/41 ━━━━━━━━━━━━━━━━━━━━ 125s 3s/step - accuracy: 0.9869 - loss: 0.0458
+Test loss: 0.03516744449734688, Test accuracy: 0.9908466935157776
+2025-01-19 07:49:35.823621: W external/local_tsl/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 629280000 exceeds 10% of free system memory.
+41/41 ━━━━━━━━━━━━━━━━━━━━ 132s 3s/step
+              precision    recall  f1-score   support
+
+      glioma       0.99      0.98      0.99       300
+  meningioma       0.98      1.00      0.99       306
+     notumor       1.00      1.00      1.00       405
+   pituitary       1.00      0.99      0.99       300
+
+    accuracy                           0.99      1311
+   macro avg       0.99      0.99      0.99      1311
+weighted avg       0.99      0.99      0.99      1311
+
+WARNING:absl:You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+(base) hemanth-krishna-a-b@hemanth-krishna-a-b:~/Desktop/Hemanth$ 

@@ -1,0 +1,142 @@
+import tensorflow as tf
+import cv2
+import numpy as np
+import os
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+import keras
+from sklearn.metrics import classification_report, confusion_matrix
+import itertools
+
+# Data directories
+data_dir = './data/cropped'  # Replace with your actual local directory path
+categories = ['glioma', 'meningioma', 'notumor', 'pituitary']
+
+# Image size
+image_size = 200
+
+# Preparing training and testing images
+x_train = []  # Training images
+y_train = []  # Training labels
+x_test = []   # Testing images
+y_test = []   # Testing labels
+
+for label in categories:
+    trainPath = os.path.join(data_dir, 'Training', label)
+    for file in os.listdir(trainPath):
+        image = cv2.imread(os.path.join(trainPath, file), 0)  # Load images in gray scale
+        image = cv2.bilateralFilter(image, 2, 50, 50)  # Remove image noise
+        image = cv2.applyColorMap(image, cv2.COLORMAP_BONE)  # Apply pseudocolor
+        image = cv2.resize(image, (image_size, image_size))  # Resize to 200x200
+        x_train.append(image)
+        y_train.append(categories.index(label))
+
+    testPath = os.path.join(data_dir, 'Testing', label)
+    for file in os.listdir(testPath):
+        image = cv2.imread(os.path.join(testPath, file), 0)
+        image = cv2.bilateralFilter(image, 2, 50, 50)
+        image = cv2.applyColorMap(image, cv2.COLORMAP_BONE)
+        image = cv2.resize(image, (image_size, image_size))
+        x_test.append(image)
+        y_test.append(categories.index(label))
+
+x_train = np.array(x_train) / 255.0
+x_test = np.array(x_test) / 255.0
+
+# Convert labels to one-hot encoding
+y_train = tf.keras.utils.to_categorical(y_train)
+y_test = tf.keras.utils.to_categorical(y_test)
+
+# Split data into training and validation sets
+x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.2, random_state=42)
+
+# Augmentation generator
+datagen = tf.keras.preprocessing.image.ImageDataGenerator(
+    rotation_range=10,
+    width_shift_range=0.05,
+    height_shift_range=0.05,
+    horizontal_flip=True)
+
+datagen.fit(x_train)
+
+# Using ResNet50 as base model
+IMG_SIZE = (200, 200)
+conv_base = tf.keras.applications.ResNet50(
+    include_top=False,
+    input_shape=IMG_SIZE + (3,),
+    weights='imagenet')
+
+for layer in conv_base.layers:
+    layer.trainable = True
+
+# Define the model
+model = conv_base.output
+model = tf.keras.layers.GlobalAveragePooling2D()(model)
+model = tf.keras.layers.Dropout(0.4)(model)
+model = tf.keras.layers.Dense(4, activation="softmax")(model)
+model = tf.keras.Model(inputs=conv_base.input, outputs=model)
+
+# Compile the model
+adam = tf.keras.optimizers.Adam(learning_rate=0.0001)
+model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Callbacks for saving the best model and adjusting learning rate
+callbacks = [
+    tf.keras.callbacks.ModelCheckpoint('model_weights.keras', monitor='val_loss', mode='min', verbose=1, save_best_only=True),
+    tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.3, patience=2, verbose=1, mode='min', min_lr=0.00000000001)
+]
+
+# Train the model
+history = model.fit(datagen.flow(x_train, y_train, batch_size=64), validation_data=(x_val, y_val),
+                    epochs=50, callbacks=callbacks)
+
+# Plot the learning curves (accuracy and loss)
+plt.figure(figsize=[8, 6])
+plt.plot(history.history['loss'], 'r', linewidth=3.0)
+plt.plot(history.history['val_loss'], 'b', linewidth=3.0)
+plt.legend(['Training loss', 'Validation Loss'], fontsize=18)
+plt.xlabel('Epochs', fontsize=16)
+plt.ylabel('Loss', fontsize=16)
+plt.title('Loss Curves', fontsize=16)
+plt.show()
+
+plt.figure(figsize=[8, 6])
+plt.plot(history.history['accuracy'], 'r', linewidth=3.0)
+plt.plot(history.history['val_accuracy'], 'b', linewidth=3.0)
+plt.legend(['Training Accuracy', 'Validation Accuracy'], fontsize=18)
+plt.xlabel('Epochs', fontsize=16)
+plt.ylabel('Accuracy', fontsize=16)
+plt.title('Accuracy Curves', fontsize=16)
+plt.show()
+
+# Evaluate the model on the test set
+loss, acc = model.evaluate(x_test, y_test)
+print(f'Test loss: {loss}, Test accuracy: {acc}')
+
+# Classification Report and Confusion Matrix
+predicted_classes = np.argmax(model.predict(x_test), axis=1)
+print(classification_report(np.argmax(y_test, axis=1), predicted_classes, target_names=categories))
+
+conf_matrix = confusion_matrix(np.argmax(y_test, axis=1), predicted_classes)
+
+def plot_confusion_matrix(cm, classes, title='Confusion Matrix', cmap=plt.cm.Blues):
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, cm[i, j], horizontalalignment="center", color="white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+plot_confusion_matrix(conf_matrix, categories)
+plt.show()
+
+# Save the final model
+model.save('brain_tumor_classifier.h5')
